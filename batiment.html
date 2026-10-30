@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- SEO Meta Tags -->
+    <title>Bâtir Horizon | Entreprise de Bâtiment & Construction Premium</title>
+    <meta name="description" content="Bâtir Horizon, expert en construction, rénovation et architecture de prestige. Découvrez nos réalisations et réservez votre consultation.">
+    <meta name="keywords" content="construction, bâtiment, rénovation, architecture, entreprise générale, maçonnerie, Dakar, Sénégal">
+    <meta property="og:title" content="Bâtir Horizon | Bâtiment & Construction">
+    <meta property="og:description" content="Donnez vie à vos projets architecturaux avec une entreprise d'exception.">
+    <meta property="og:type" content="website">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ============ VARIABLES & RESET ============ */
+        :root {
+            --bg-dark: #0a0a0a;
+            --bg-darker: #050505;
+            --bg-card: #121212;
+            --copper: #b87333; /* Couleur cuivre pour le bâtiment */
+            --copper-light: #d99a5c;
+            --text-main: #f0f0f0;
+            --text-dim: #a0a0a0;
+            --border: rgba(255, 255, 255, 0.1);
+            --font-title: 'Cinzel', serif;
+            --font-body: 'Jost', sans-serif;
+            --transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: var(--font-body);
+            line-height: 1.7;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+        img { max-width: 100%; display: block; object-fit: cover; }
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+
+        /* ============ TYPOGRAPHY ============ */
+        h1, h2, h3, h4 { font-family: var(--font-title); font-weight: 600; line-height: 1.2; }
+        .h-xl { font-size: clamp(3rem, 7vw, 6rem); letter-spacing: 2px; text-transform: uppercase; }
+        .h-lg { font-size: clamp(2rem, 4vw, 3.5rem); margin-bottom: 20px; }
+        .h-md { font-size: clamp(1.2rem, 2.5vw, 1.8rem); }
+        .text-copper { color: var(--copper); }
+        .text-dim { color: var(--text-dim); }
+        .text-center { text-align: center; }
+
+        /* ============ COMPONENTS ============ */
+        .container {
+            width: 90%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        .section { padding: clamp(60px, 10vw, 120px) 0; }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 15px 35px;
+            background: var(--copper);
+            color: var(--bg-darker);
+            font-family: var(--font-body);
+            font-weight: 500;
+            font-size: 0.85rem;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            border: 1px solid var(--copper);
+            cursor: pointer;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+        .btn:hover {
+            background: transparent;
+            color: var(--copper);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(184, 115, 51, 0.2);
+        }
+        .btn-outline {
+            background: transparent;
+            color: var(--text-main);
+            border-color: var(--border);
+        }
+        .btn-outline:hover {
+            border-color: var(--copper);
+            color: var(--copper);
+        }
+
+        /* Animation Reveal */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ============ NAVIGATION ============ */
+        .header {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 1000;
+            padding: 20px 0;
+            transition: var(--transition);
+            border-bottom: 1px solid transparent;
+        }
+        .header.scrolled {
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 15px 0;
+            border-bottom: 1px solid var(--border);
+        }
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-family: var(--font-title);
+            font-size: 1.5rem;
+            letter-spacing: 3px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .logo-icon {
+            width: 30px; height: 30px;
+            border: 1px solid var(--copper);
+            display: flex; align-items: center; justify-content: center;
+            color: var(--copper);
+            font-size: 0.9rem;
+        }
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+        .nav-links a {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            position: relative;
+            transition: var(--transition);
+        }
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px; left: 0;
+            width: 0; height: 1px;
+            background: var(--copper);
+            transition: var(--transition);
+        }
+        .nav-links a:hover { color: var(--copper); }
+        .nav-links a:hover::after { width: 100%; }
+        
+        .nav-cta { display: flex; gap: 15px; align-items: center; }
+        .whatsapp-btn {
+            color: #25D366;
+            font-size: 1.5rem;
+            transition: var(--transition);
+        }
+        .whatsapp-btn:hover { transform: scale(1.1); }
+
+        /* Menu Mobile */
+        .burger {
+            display: none;
+            cursor: pointer;
+            flex-direction: column;
+            gap: 5px;
+        }
+        .burger span {
+            width: 25px; height: 2px;
+            background: var(--text-main);
+            transition: var(--transition);
+        }
+
+        /* ============ HERO ============ */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            z-index: -1;
+        }
+        .hero-bg img {
+            width: 100%; height: 100%;
+            filter: brightness(0.4);
+            animation: zoomEffect 20s infinite alternate;
+        }
+        @keyframes zoomEffect {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.1); }
+        }
+        .hero-content {
+            max-width: 800px;
+            padding-top: 80px;
+        }
+        .hero-subtitle {
+            font-size: 0.9rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--copper);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .hero-subtitle::before {
+            content: '';
+            width: 50px; height: 1px;
+            background: var(--copper);
+        }
+        .hero-actions {
+            margin-top: 40px;
+            display: flex;
+            gap: 20px;
+        }
+
+        /* ============ PRÉSENTATION ============ */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+        .about-img {
+            position: relative;
+            height: 600px;
+        }
+        .about-img img {
+            width: 100%; height: 100%;
+        }
+        .about-img::before {
+            content: '';
+            position: absolute;
+            top: 20px; left: 20px; right: -20px; bottom: -20px;
+            border: 1px solid var(--copper);
+            z-index: -1;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-top: 40px;
+            border-top: 1px solid var(--border);
+            padding-top: 30px;
+        }
+        .stat-item h4 {
+            font-size: 2.5rem;
+            color: var(--copper);
+            margin-bottom: 5px;
+        }
+        .stat-item p {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-dim);
+        }
+
+        /* ============ SERVICES ============ */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        .service-card {
+            background: var(--bg-card);
+            padding: 40px 30px;
+            border: 1px solid var(--border);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 3px;
+            background: var(--copper);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: var(--transition);
+        }
+        .service-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(184, 115, 51, 0.3);
+            background: #161616;
+        }
+        .service-card:hover::before { transform: scaleX(1); }
+        .service-icon {
+            font-size: 2.5rem;
+            color: var(--copper);
+            margin-bottom: 25px;
+        }
+        .service-card h3 { margin-bottom: 15px; font-size: 1.3rem; }
+        .service-card p { font-size: 0.95rem; color: var(--text-dim); }
+
+        /* ============ RÉALISATIONS (GALERIE) ============ */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-auto-rows: 300px;
+            gap: 15px;
+        }
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+        .gallery-item img {
+            width: 100%; height: 100%;
+            transition: var(--transition);
+        }
+        .gallery-item:hover img { transform: scale(1.08); }
+        .gallery-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 30px;
+            opacity: 0;
+            transition: var(--transition);
+        }
+        .gallery-item:hover .gallery-overlay { opacity: 1; }
+        .gallery-overlay h4 { color: var(--copper); font-size: 1.2rem; margin-bottom: 5px; }
+        .gallery-overlay p { font-size: 0.85rem; color: var(--text-main); }
+        
+        /* Grid layout spécifique */
+        .gallery-item:nth-child(1) { grid-column: span 2; grid-row: span 2; }
+        .gallery-item:nth-child(4) { grid-column: span 2; }
+        .gallery-item:nth-child(5) { grid-column: span 2; }
+        .gallery-item:nth-child(6) { grid-column: span 2; }
+
+        .play-btn {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px; height: 60px;
+            background: rgba(184, 115, 51, 0.8);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            color: white; font-size: 1.5rem;
+            backdrop-filter: blur(5px);
+            transition: var(--transition);
+        }
+        .gallery-item:hover .play-btn {
+            background: var(--copper);
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+
+        /* ============ CONTACT & RÉSERVATION ============ */
+        .contact-section { background: var(--bg-darker); }
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 60px;
+        }
+        .contact-info h2 { margin-bottom: 20px; }
+        .contact-info p { color: var(--text-dim); margin-bottom: 40px; }
+        .contact-details {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+        .contact-item {
+            display: flex;
+            gap: 15px;
+            align-items: flex-start;
+        }
+        .contact-item i {
+            color: var(--copper);
+            font-size: 1.2rem;
+            margin-top: 3px;
+        }
+        .contact-item h5 {
+            font-family: var(--font-body);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-dim);
+            margin-bottom: 5px;
+        }
+        .contact-item span { font-size: 1.05rem; }
+
+        /* Formulaire */
+        .form-card {
+            background: var(--bg-card);
+            padding: 40px;
+            border: 1px solid var(--border);
+        }
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        .form-group { margin-bottom: 20px; }
+        .form-group.full { grid-column: span 2; }
+        .form-group label {
+            display: block;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+            color: var(--text-dim);
+        }
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            background: transparent;
+            border: 1px solid var(--border);
+            padding: 15px;
+            color: var(--text-main);
+            font-family: var(--font-body);
+            font-size: 1rem;
+            transition: var(--transition);
+            outline: none;
+        }
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+            border-color: var(--copper);
+            background: rgba(184, 115, 51, 0.05);
+        }
+        .form-group textarea { resize: vertical; min-height: 120px; }
+        /* Style pour le select date */
+        input[type="date"] { color-scheme: dark; }
+
+        /* ============ WHATSAPP FLOTTANT ============ */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #25D366;
+            color: white;
+            width: 60px; height: 60px;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 2rem;
+            z-index: 1000;
+            box-shadow: 0 10px 20px rgba(37, 211, 102, 0.3);
+            transition: var(--transition);
+            animation: pulse 2s infinite;
+        }
+        .whatsapp-float:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 25px rgba(37, 211, 102, 0.4);
+        }
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.5); }
+            70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+        }
+
+        /* ============ FOOTER ============ */
+        .footer {
+            background: var(--bg-darker);
+            border-top: 1px solid var(--border);
+            padding: 40px 0;
+            text-align: center;
+            font-size: 0.85rem;
+            color: var(--text-dim);
+        }
+        .footer-logo { margin-bottom: 20px; justify-content: center; }
+
+        /* ============ RESPONSIVE ============ */
+        @media (max-width: 1024px) {
+            .about-grid { grid-template-columns: 1fr; gap: 40px; }
+            .about-img { height: 400px; max-width: 600px; margin: 0 auto; }
+            .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+            .gallery-item:nth-child(1) { grid-column: span 2; grid-row: span 1; }
+            .gallery-item:nth-child(4), .gallery-item:nth-child(5), .gallery-item:nth-child(6) { grid-column: span 1; }
+            .contact-grid { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 0; right: -100%;
+                width: 70%; height: 100vh;
+                background: var(--bg-card);
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                transition: var(--transition);
+                border-left: 1px solid var(--border);
+            }
+            .nav-links.active { right: 0; }
+            .burger { display: flex; z-index: 1001; }
+            .burger.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+            .burger.active span:nth-child(2) { opacity: 0; }
+            .burger.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+            
+            .nav-cta .btn { display: none; } /* Cache le bouton devis sur mobile */
+            .hero-actions { flex-direction: column; }
+            .gallery-grid { grid-template-columns: 1fr; grid-auto-rows: 250px; }
+            .gallery-item:nth-child(n) { grid-column: span 1; grid-row: span 1; }
+            .form-grid { grid-template-columns: 1fr; }
+            .form-group.full { grid-column: span 1; }
+            .whatsapp-float { width: 50px; height: 50px; font-size: 1.5rem; bottom: 20px; right: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ============ NAVIGATION ============ -->
+    <header class="header" id="header">
+        <div class="container nav-container">
+            <a href="#" class="logo">
+                <div class="logo-icon">B</div>
+                BÂTIR HORIZON
+            </a>
+            
+            <nav class="nav-links" id="navLinks">
+                <a href="#accueil" onclick="closeMenu()">Accueil</a>
+                <a href="#presentation" onclick="closeMenu()">Présentation</a>
+                <a href="#services" onclick="closeMenu()">Services</a>
+                <a href="#realisations" onclick="closeMenu()">Réalisations</a>
+                <a href="#contact" onclick="closeMenu()">Contact</a>
+            </nav>
+
+            <div class="nav-cta">
+                <!-- Lien WhatsApp direct -->
+                <a href="https://wa.me/221770000000?text=Bonjour%2C%20je%20souhaite%20un%20devis%20pour%20mon%20projet%20de%20construction." target="_blank" class="whatsapp-btn" title="Discuter sur WhatsApp">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+                </a>
+                <a href="#contact" class="btn">Devis Gratuit</a>
+                <div class="burger" id="burger" onclick="toggleMenu()">
+                    <span></span><span></span><span></span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ============ HERO / ACCUEIL ============ -->
+    <section class="hero" id="accueil">
+        <div class="hero-bg">
+            <!-- Image de fond haute qualité (architecture) -->
+            <img src="https://images.unsplash.com/photo-1541888086925-ebbcbfddb465?auto=format&fit=crop&w=2000&q=80" alt="Chantier de construction moderne">
+        </div>
+        <div class="container hero-content reveal">
+            <span class="hero-subtitle">Bâtiment & Architecture</span>
+            <h1 class="h-xl">Bâtissons<br><span class="text-copper">l'Avenir.</span></h1>
+            <p class="text-dim" style="max-width: 500px; margin-top: 20px; font-size: 1.1rem;">
+                De la conception à la livraison, nous donnons vie à vos projets les plus ambitieux avec une précision d'orfèvre et des matériaux d'exception.
+            </p>
+            <div class="hero-actions">
+                <a href="#realisations" class="btn">Découvrir nos projets</a>
+                <a href="#presentation" class="btn btn-outline">Qui sommes-nous ?</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ PRÉSENTATION ============ -->
+    <section class="section" id="presentation">
+        <div class="container about-grid">
+            <div class="about-img reveal">
+                <img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=800&q=80" alt="Équipe d'architectes et ingénieurs">
+            </div>
+            <div class="about-text reveal">
+                <span class="hero-subtitle" style="margin-bottom: 15px;">Notre Vision</span>
+                <h2 class="h-lg">L'excellence dans chaque fondation.</h2>
+                <p class="text-dim">
+                    Depuis plus de 15 ans, Bâtir Horizon s'impose comme un acteur incontournable du secteur de la construction. Nous allions l'expertise technique pointue à une vision esthétique unique. 
+                </p>
+                <p class="text-dim" style="margin-top: 15px;">
+                    Que ce soit pour une villa de prestige, un immeuble résidentiel ou un espace commercial, nous garantissons des délais respectés, une transparence totale et une finition irréprochable.
+                </p>
+                
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <h4 class="count" data-target="150">0</h4>
+                        <p>Projets livrés</p>
+                    </div>
+                    <div class="stat-item">
+                        <h4 class="count" data-target="15">0</h4>
+                        <p>Années d'expertise</p>
+                    </div>
+                    <div class="stat-item">
+                        <h4 class="count" data-target="100">0</h4>
+                        <p>% Satisfaction</p>
+                    </div>
+                    <div class="stat-item">
+                        <h4>+50</h4>
+                        <p>Artisans experts</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ SERVICES ============ -->
+    <section class="section" id="services" style="background: var(--bg-darker);">
+        <div class="container">
+            <div class="text-center reveal" style="margin-bottom: 60px;">
+                <span class="hero-subtitle" style="justify-content: center;">Nos Domaines d'Expertise</span>
+                <h2 class="h-lg">Des services sur mesure.</h2>
+            </div>
+            
+            <div class="services-grid">
+                <!-- Service 1 -->
+                <div class="service-card reveal">
+                    <div class="service-icon">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                    </div>
+                    <h3>Construction Neuve</h3>
+                    <p>Réalisation de bâtiments résidentiels et commerciaux clés en main, du gros œuvre aux finitions les plus fines.</p>
+                </div>
+                <!-- Service 2 -->
+                <div class="service-card reveal">
+                    <div class="service-icon">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+                    </div>
+                    <h3>Rénovation & Réhabilitation</h3>
+                    <p>Donnez une seconde vie à vos espaces. Nous modernisons et restructurons vos biens en respectant leur âme.</p>
+                </div>
+                <!-- Service 3 -->
+                <div class="service-card reveal">
+                    <div class="service-icon">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+                    </div>
+                    <h3>Architecture & Design</h3>
+                    <p>Conception de plans 3D, études de faisabilité et direction artistique pour des projets uniques et durables.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ RÉALISATIONS (GALERIE) ============ -->
+    <section class="section" id="realisations">
+        <div class="container">
+            <div class="text-center reveal" style="margin-bottom: 60px;">
+                <span class="hero-subtitle" style="justify-content: center;">Portfolio</span>
+                <h2 class="h-lg">Nos Réalisations.</h2>
+                <p class="text-dim" style="max-width: 600px; margin: 10px auto 0;">Découvrez une sélection de nos projets récents à travers le Sénégal et la sous-région.</p>
+            </div>
+
+            <div class="gallery-grid">
+                <!-- Item 1 (Grand) -->
+                <div class="gallery-item reveal">
+                    <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1000&q=80" alt="Villa Moderne Almadies" loading="lazy">
+                    <div class="gallery-overlay">
+                        <h4 class="text-copper">Villa Almadies</h4>
+                        <p>Construction neuve - 450m²</p>
+                    </div>
+                </div>
+                <!-- Item 2 -->
+                <div class="gallery-item reveal">
+                    <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=600&q=80" alt="Immeuble de bureaux" loading="lazy">
+                    <div class="gallery-overlay">
+                        <h4 class="text-copper">Siège Social</h4>
+                        <p>Immeuble R+5 - Plateau</p>
+                    </div>
+                </div>
+                <!-- Item 3 (Vidéo Placeholder) -->
+                <div class="gallery-item reveal">
+                    <img src="https://images.unsplash.com/photo-1504307651254-35680f356f12?auto=format&fit=crop&w=600&q=80" alt="Chantier en cours" loading="lazy">
+                    <div class="gallery-overlay" style="opacity: 1; background: rgba(0,0,0,0.4);">
+                        <div class="play-btn">▶</div>
+                    </div>
+                </div>
+                <!-- Item 4 -->
+                <div class="gallery-item reveal">
+                    <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80" alt="Maison contemporaine" loading="lazy">
+                    <div class="gallery-overlay">
+                        <h4 class="text-copper">Résidence Teranga</h4>
+                        <p>Rénovation complète</p>
+                    </div>
+                </div>
+                <!-- Item 5 -->
+                <div class="gallery-item reveal">
+                    <img src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=800&q=80" alt="Intérieur luxueux" loading="lazy">
+                    <div class="gallery-overlay">
+                        <h4 class="text-copper">Penthouse Ngor</h4>
+                        <p>Design d'intérieur</p>
+                    </div>
+                </div>
+                <!-- Item 6 -->
+                <div class="gallery-item reveal">
+                    <img src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=800&q=80" alt="Villa avec piscine" loading="lazy">
+                    <div class="gallery-overlay">
+                        <h4 class="text-copper">Villa Saly</h4>
+                        <p>Projet clé en main</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ CONTACT & RÉSERVATION ============ -->
+    <section class="section contact-section" id="contact">
+        <div class="container contact-grid">
+            
+            <!-- Infos de contact -->
+            <div class="contact-info reveal">
+                <span class="hero-subtitle">Contactez-nous</span>
+                <h2 class="h-lg">Prêt à démarrer<br>votre projet ?</h2>
+                <p class="text-dim">Prenez rendez-vous pour une consultation gratuite. Notre équipe vous accompagnera de la première esquisse à la remise des clés.</p>
+                
+                <div class="contact-details">
+                    <div class="contact-item">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--copper)" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                        <div>
+                            <h5>Téléphone</h5>
+                            <span>+221 77 000 00 00</span>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--copper)" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                        <div>
+                            <h5>Email</h5>
+                            <span>contact@batirhorizon.sn</span>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--copper)" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                        <div>
+                            <h5>Bureau</h5>
+                            <span>Zone de Captage, Dakar, Sénégal</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Formulaire de réservation -->
+            <div class="form-card reveal">
+                <h3 class="h-md" style="margin-bottom: 20px;">Réserver une consultation</h3>
+                <form action="#" method="POST" onsubmit="event.preventDefault(); alert('Merci ! Votre demande a bien été envoyée. Nous vous contacterons sous 24h.');">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="nom">Nom complet</label>
+                            <input type="text" id="nom" placeholder="Votre nom" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" placeholder="votre@email.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="tel">Téléphone</label>
+                            <input type="tel" id="tel" placeholder="+221 ..." required>
+                        </div>
+                        <div class="form-group">
+                            <label for="date">Date souhaitée</label>
+                            <!-- Input de réservation -->
+                            <input type="date" id="date" required>
+                        </div>
+                        <div class="form-group full">
+                            <label for="service">Type de projet</label>
+                            <select id="service" required>
+                                <option value="">Sélectionnez un service</option>
+                                <option value="construction">Construction Neuve</option>
+                                <option value="renovation">Rénovation</option>
+                                <option value="architecture">Architecture & Design</option>
+                                <option value="autre">Autre</option>
+                            </select>
+                        </div>
+                        <div class="form-group full">
+                            <label for="message">Détails de votre projet</label>
+                            <textarea id="message" placeholder="Décrivez brièvement votre projet..." required></textarea>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn" style="width: 100%;">Envoyer ma demande</button>
+                </form>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ============ FOOTER ============ -->
+    <footer class="footer">
+        <div class="container">
+            <a href="#" class="logo footer-logo">
+                <div class="logo-icon">B</div>
+                BÂTIR HORIZON
+            </a>
+            <p>&copy; 2026 Bâtir Horizon. Tous droits réservés. Design & Construction de prestige.</p>
+        </div>
+    </footer>
+
+    <!-- ============ BOUTON WHATSAPP FLOTTANT ============ -->
+    <a href="https://wa.me/221770000000?text=Bonjour%2C%20je%20souhaite%20discuter%20d'un%20projet%20de%20construction." target="_blank" class="whatsapp-float" title="Contactez-nous sur WhatsApp">
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+    </a>
+
+    <!-- ============ JAVASCRIPT ============ -->
+    <script>
+        // 1. Navigation - Effet au défilement
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // 2. Menu Mobile
+        function toggleMenu() {
+            const nav = document.getElementById('navLinks');
+            const burger = document.getElementById('burger');
+            nav.classList.toggle('active');
+            burger.classList.toggle('active');
+        }
+        function closeMenu() {
+            document.getElementById('navLinks').classList.remove('active');
+            document.getElementById('burger').classList.remove('active');
+        }
+
+        // 3. Animations Reveal au Scroll
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    observer.unobserve(entry.target); // Animation jouée une seule fois
+                }
+            });
+        }, {
+            threshold: 0.15, // Déclenche quand 15% de l'élément est visible
+            rootMargin: "0px 0px -50px 0px"
+        });
+
+        revealElements.forEach(el => revealObserver.observe(el));
+
+        // 4. Compteurs animés (Stats)
+        const counters = document.querySelectorAll('.count');
+        const speed = 200;
+
+        const counterObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const updateCount = () => {
+                        const target = +entry.target.getAttribute('data-target');
+                        const count = +entry.target.innerText;
+                        const inc = target / speed;
+
+                        if (count < target) {
+                            entry.target.innerText = Math.ceil(count + inc);
+                            setTimeout(updateCount, 20);
+                        } else {
+                            entry.target.innerText = target;
+                        }
+                    };
+                    updateCount();
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        counters.forEach(counter => counterObserver.observe(counter));
+        
+        // 5. Fermer le menu mobile au clic sur un lien (déjà géré par onclick="closeMenu()")
+    </script>
+</body>
+</html>
